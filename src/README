@@ -1,0 +1,32 @@
+#################################################################
+# CANNY EDGE DETECTION											#
+#																#
+#	To make the program:										#
+#		- Just execure 'make -f README'.						#
+#	To remove the program:										#
+#		- just execute 'make clean -f README'					#
+# 	To run the program:											#
+#		@problem_01 											#
+#			- USAGE: problem_01 [image-file-name]				#
+#				image-file-name: Input image file. (circle.raw)	#
+################################################################# 
+
+CC=g++
+CFLAGS=-c -Wall
+LDFLAGS=
+SOURCES=main.cpp canny.cpp fileIO.cpp gaussianSmooth.cpp hysteresis.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=main
+
+all: $(SOURCES) $(EXECUTABLE)
+	
+$(EXECUTABLE): $(OBJECTS) 
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -fr main 
+	rm -fr *.o
+	rm -fr *.pgm
